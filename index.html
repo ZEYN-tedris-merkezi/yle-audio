@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZEYN YLE Listening Lab</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--navy:#09265f;--blue:#1167db;--sky:#eaf4ff;--green:#1eb980;--yellow:#ffc83d;--card:#fff;--ink:#10213d;--muted:#6f7f99}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f5f8fe;color:var(--ink)}
+.wrap{max-width:1180px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-weight:900;color:var(--navy);font-size:22px}.pill{background:#0e62d8;color:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:13px}
+.hero{background:linear-gradient(120deg,#fff,#edf7ff 60%,#ecfff7);border:1px solid #dfe9f7;border-radius:28px;padding:30px;box-shadow:0 14px 45px #2b5d9b18}
+.hero h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:0;color:var(--navy);letter-spacing:-2px}.hero h2{margin:12px 0 8px;color:#1167db}.hero p{color:var(--muted);max-width:650px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stat{background:#fff;border:1px solid #e1e9f5;border-radius:14px;padding:12px 15px;font-weight:750}
+.section{margin-top:28px}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.level{border-radius:22px;padding:22px;min-height:165px;border:1px solid #dce6f4;position:relative;overflow:hidden}.level h3{font-size:30px;margin:8px 0}.level small{font-weight:800}.level.st{background:linear-gradient(135deg,#fff5c8,#fff)}.level.mo{background:linear-gradient(135deg,#d9ffe8,#fff)}.level.fl{background:linear-gradient(135deg,#d8ecff,#fff);cursor:pointer}
+.level.disabled{opacity:.58}.badge{display:inline-block;background:#ffffffaa;padding:6px 10px;border-radius:9px;font-weight:900}.ready{color:#0d67d9;font-weight:900}
+.panel{display:none;margin-top:18px;background:#fff;border:1px solid #dfe7f3;border-radius:24px;padding:20px;box-shadow:0 12px 35px #254f8612}.panel.show{display:block}
+.tests{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.test{border:1px solid #dce5f2;background:#fff;border-radius:16px;padding:16px;text-align:left;cursor:pointer;transition:.15s}.test:hover{transform:translateY(-2px);border-color:#4f8ee8}.test strong{display:block;font-size:18px}.test .state{font-size:12px;color:var(--muted);margin-top:5px}.test.coming{opacity:.5;cursor:not-allowed}
+.player{display:none;margin-top:18px;border-radius:20px;background:linear-gradient(135deg,#eff7ff,#f6fffb);padding:20px;border:1px solid #dbe8f8}.player.show{display:block}
+.player-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.player h3{margin:0}.parts{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:18px 0}.part{border:1px solid #d5e1f1;background:#fff;border-radius:13px;padding:12px;cursor:pointer;font-weight:850}.part.active{background:#1167db;color:#fff;border-color:#1167db}
+audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{border:0;background:#eef4ff;color:#0b57b7;padding:9px 12px;border-radius:10px;font-weight:800;cursor:pointer}
+.progress{height:8px;background:#e8eef8;border-radius:99px;overflow:hidden;margin-top:8px}.bar{height:100%;background:linear-gradient(90deg,#1167db,#22b982);width:0}
+.footer{text-align:center;color:#8090a8;font-size:12px;padding:35px 0}
+@media(max-width:850px){.levels{grid-template-columns:1fr}.tests{grid-template-columns:repeat(3,1fr)}.hero{padding:22px}.parts{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:520px){.wrap{padding:12px}.tests{grid-template-columns:repeat(2,1fr)}.parts{grid-template-columns:repeat(2,1fr)}.hero h1{letter-spacing:-1px}.top .pill{font-size:11px}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="top"><div class="brand">ZEYN <span style="font-weight:600;font-size:13px">TƏDRİS MƏRKƏZİ</span></div><div class="pill">YLE • NEW 12 TESTS</div></div>
+<section class="hero">
+<div class="badge">🎧 Cambridge English • Audio Portal</div>
+<h1>YLE<br>Listening Lab</h1>
+<h2>One QR. Three Levels. All Listening.</h2>
+<p>Choose your level, open a test and listen to each part. Your last position and completed parts are remembered on this device.</p>
+<div class="stats"><div class="stat">⭐ Pre A1 Starters</div><div class="stat">🟢 A1 Movers</div><div class="stat">🔵 A2 Flyers</div><div class="stat">45 Flyers audios ready</div></div>
+</section>
+
+<section class="section">
+<h2>Choose Your Level</h2>
+<div class="levels">
+<div class="level st disabled"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
+<div class="level mo disabled"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
+<div class="level fl" onclick="openFlyers()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><small class="ready">9 TESTS READY →</small></div>
+</div>
+</section>
+
+<section id="flyersPanel" class="panel">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="badge">A2 FLYERS</div><h2 style="margin:8px 0">Listening Tests</h2><div class="hint">Tests 1–9 ready • Tests 10–12 coming soon</div></div><button class="back" onclick="closeFlyers()">← Levels</button></div>
+<div class="progress"><div class="bar" id="overallBar"></div></div><div id="overallText" class="hint" style="margin:7px 0 16px"></div>
+<div class="tests" id="tests"></div>
+<div class="player" id="player">
+<div class="player-head"><div><div class="hint">A2 Flyers</div><h3 id="playerTitle">Test 1</h3></div><button class="back" onclick="document.getElementById('player').classList.remove('show')">Close</button></div>
+<div class="parts" id="parts"></div>
+<div class="hint" id="nowPlaying">Choose a part</div>
+<audio id="audio" controls preload="metadata"></audio>
+<div class="hint" style="margin-top:8px">Playback position is saved automatically.</div>
+</div>
+</section>
+<div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
+</div>
+<script>
+const READY=9, PARTS=5;
+let currentTest=1,currentPart=1;
+const audio=document.getElementById('audio');
+const key=(t,p)=>`zeyn_yle_flyers_${t}_${p}`;
+function openFlyers(){document.getElementById('flyersPanel').classList.add('show');document.getElementById('flyersPanel').scrollIntoView({behavior:'smooth'});renderTests()}
+function closeFlyers(){document.getElementById('flyersPanel').classList.remove('show')}
+function done(t,p){return localStorage.getItem(key(t,p)+'_done')==='1'}
+function renderTests(){
+ const box=document.getElementById('tests');box.innerHTML='';
+ for(let t=1;t<=12;t++){
+  let b=document.createElement('button');b.className='test'+(t>READY?' coming':'');
+  let count=t<=READY?[1,2,3,4,5].filter(p=>done(t,p)).length:0;
+  b.innerHTML=`<strong>🎧 Test ${t}</strong><div class="state">${t<=READY?`${count}/5 parts completed`:'Coming soon'}</div>`;
+  if(t<=READY)b.onclick=()=>openTest(t); box.appendChild(b)
+ }
+ updateOverall()
+}
+function updateOverall(){
+ let n=0;for(let t=1;t<=READY;t++)for(let p=1;p<=5;p++)if(done(t,p))n++;
+ let pct=Math.round(n/(READY*5)*100);
+ document.getElementById('overallBar').style.width=pct+'%';
+ document.getElementById('overallText').textContent=`${n} of ${READY*5} available parts completed (${pct}%)`;
+}
+function openTest(t){currentTest=t;document.getElementById('player').classList.add('show');document.getElementById('playerTitle').textContent=`Test ${t}`;renderParts();selectPart(1);document.getElementById('player').scrollIntoView({behavior:'smooth',block:'center'})}
+function renderParts(){
+ const box=document.getElementById('parts');box.innerHTML='';
+ for(let p=1;p<=5;p++){let b=document.createElement('button');b.className='part';b.id='part'+p;b.innerHTML=`${done(currentTest,p)?'✓ ':''}Part ${p}`;b.onclick=()=>selectPart(p);box.appendChild(b)}
+}
+function selectPart(p){
+ currentPart=p;document.querySelectorAll('.part').forEach(x=>x.classList.remove('active'));document.getElementById('part'+p).classList.add('active');
+ audio.src=`audio/flyers/flyers_t${String(currentTest).padStart(2,'0')}_p${String(p).padStart(2,'0')}.mp3`;
+ document.getElementById('nowPlaying').textContent=`Test ${currentTest} • Part ${p}`;
+ audio.onloadedmetadata=()=>{let pos=Number(localStorage.getItem(key(currentTest,currentPart)+'_pos')||0);if(pos>0&&pos<audio.duration-3)audio.currentTime=pos}
+}
+audio.addEventListener('timeupdate',()=>{if(audio.currentTime>0)localStorage.setItem(key(currentTest,currentPart)+'_pos',audio.currentTime.toFixed(1))});
+audio.addEventListener('ended',()=>{localStorage.setItem(key(currentTest,currentPart)+'_done','1');localStorage.removeItem(key(currentTest,currentPart)+'_pos');renderParts();renderTests()});
+renderTests();
+</script></body></html>

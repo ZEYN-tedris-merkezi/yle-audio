@@ -1,0 +1,8 @@
+{
+  "name": "ZEYN YLE Listening Lab",
+  "short_name": "YLE Audio",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f8fe",
+  "theme_color": "#1167db"
+}
