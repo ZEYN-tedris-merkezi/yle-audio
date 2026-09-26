@@ -33,7 +33,7 @@ audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{b
 <h1>YLE<br>Listening Lab</h1>
 <h2>One QR. Three Levels. All Listening.</h2>
 <p>Choose your level, open a test and listen to each part. Your last position and completed parts are remembered on this device.</p>
-<div class="stats"><div class="stat">⭐ Pre A1 Starters</div><div class="stat">🟢 A1 Movers</div><div class="stat">🔵 A2 Flyers</div><div class="stat">45 Flyers audios ready</div></div>
+<div class="stats"><div class="stat">⭐ Pre A1 Starters</div><div class="stat">🟢 A1 Movers</div><div class="stat">🔵 A2 Flyers</div><div class="stat">60 Flyers audios ready</div></div>
 </section>
 
 <section class="section">
@@ -41,12 +41,12 @@ audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{b
 <div class="levels">
 <div class="level st disabled"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
 <div class="level mo disabled"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
-<div class="level fl" onclick="openFlyers()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><small class="ready">9 TESTS READY →</small></div>
+<div class="level fl" onclick="openFlyers()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><small class="ready">12 TESTS READY →</small></div>
 </div>
 </section>
 
 <section id="flyersPanel" class="panel">
-<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="badge">A2 FLYERS</div><h2 style="margin:8px 0">Listening Tests</h2><div class="hint">Tests 1–9 ready • Tests 10–12 coming soon</div></div><button class="back" onclick="closeFlyers()">← Levels</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="badge">A2 FLYERS</div><h2 style="margin:8px 0">Listening Tests</h2><div class="hint">Tests 1–12 ready • 60 audio parts</div></div><button class="back" onclick="closeFlyers()">← Levels</button></div>
 <div class="progress"><div class="bar" id="overallBar"></div></div><div id="overallText" class="hint" style="margin:7px 0 16px"></div>
 <div class="tests" id="tests"></div>
 <div class="player" id="player">
@@ -60,7 +60,7 @@ audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{b
 <div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
 </div>
 <script>
-const READY=9, PARTS=5;
+const READY=12, PARTS=5;
 let currentTest=1,currentPart=1;
 const audio=document.getElementById('audio');
 const key=(t,p)=>`zeyn_yle_flyers_${t}_${p}`;
