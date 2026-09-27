@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZEYN YLE Listening Lab</title>
+<title>ZEYN Listening Lab — New 12 Tests</title>
 <link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{--navy:#09265f;--blue:#1167db;--sky:#eaf4ff;--green:#1eb980;--yellow:#ffc83d;--card:#fff;--ink:#10213d;--muted:#6f7f99}
@@ -25,14 +25,41 @@ audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{b
 @media(max-width:850px){.levels{grid-template-columns:1fr}.tests{grid-template-columns:repeat(3,1fr)}.hero{padding:22px}.parts{grid-template-columns:repeat(5,1fr)}}
 @media(max-width:520px){.wrap{padding:12px}.tests{grid-template-columns:repeat(2,1fr)}.parts{grid-template-columns:repeat(2,1fr)}.hero h1{letter-spacing:-1px}.top .pill{font-size:11px}}
 </style>
+
+<style>
+body{background:linear-gradient(180deg,#f7fbff,#f4f8ff)}
+.top{background:#ffffffcc;backdrop-filter:blur(12px);padding:12px 16px;border-radius:16px;position:sticky;top:8px;z-index:20;box-shadow:0 8px 28px #183f7310}
+.hero{min-height:340px;display:flex;flex-direction:column;justify-content:center;background:
+radial-gradient(circle at 78% 25%,#c9f7e6 0 8%,transparent 9%),
+radial-gradient(circle at 88% 70%,#cde8ff 0 12%,transparent 13%),
+linear-gradient(120deg,#fff 0%,#edf7ff 58%,#ecfff7);border-radius:32px}
+.hero h1{font-size:clamp(46px,7vw,82px);letter-spacing:-3px;max-width:720px}
+.hero h2{font-size:clamp(20px,3vw,32px)}
+.stats .stat{box-shadow:0 8px 22px #1b4d8410}
+.levels{gap:20px}.level{min-height:205px;border-radius:26px;box-shadow:0 14px 35px #244d7d14;transition:.2s}
+.level:hover:not(.disabled){transform:translateY(-5px)}
+.level.st{background:linear-gradient(135deg,#fff0a6,#fff9df)}
+.level.mo{background:linear-gradient(135deg,#baf5cf,#edfff3)}
+.level.fl{background:linear-gradient(135deg,#b6dcff,#eef7ff)}
+.level h3{font-size:36px}.panel{border-radius:28px;padding:24px}
+.tests{grid-template-columns:repeat(4,1fr);gap:14px}.test{min-height:92px;border-radius:18px;box-shadow:0 7px 18px #17487c0c}
+.player{border-radius:26px;padding:24px;background:linear-gradient(180deg,#eaf6ff,#f7fbff 58%,#ecfaef)}
+.player-head h3{font-size:28px}.parts{gap:12px}.part{min-height:62px;border-radius:16px}
+audio{height:54px}
+@media(max-width:700px){
+ .top{top:4px}.hero{min-height:300px;border-radius:24px}.hero h1{font-size:46px}
+ .levels{grid-template-columns:1fr}.tests{grid-template-columns:repeat(2,1fr)}
+ .level{min-height:155px}.level h3{font-size:30px}.panel{padding:14px}.parts{grid-template-columns:repeat(2,1fr)}
+}
+</style>
 </head>
 <body><div class="wrap">
 <div class="top"><div class="brand">ZEYN <span style="font-weight:600;font-size:13px">TƏDRİS MƏRKƏZİ</span></div><div class="pill">YLE • NEW 12 TESTS</div></div>
 <section class="hero">
 <div class="badge">🎧 Cambridge English • Audio Portal</div>
-<h1>YLE<br>Listening Lab</h1>
-<h2>One QR. Three Levels. All Listening.</h2>
-<p>Choose your level, open a test and listen to each part. Your last position and completed parts are remembered on this device.</p>
+<h1>🎧 ZEYN<br>Listening Lab</h1>
+<h2>Cambridge English — New 12 Tests</h2>
+<p>Listen. Learn. Practice. Progress. Your listening position and completed parts are remembered automatically.</p>
 <div class="stats"><div class="stat">⭐ Pre A1 Starters</div><div class="stat">🟢 A1 Movers</div><div class="stat">🔵 A2 Flyers</div><div class="stat">60 Flyers audios ready</div></div>
 </section>
 
