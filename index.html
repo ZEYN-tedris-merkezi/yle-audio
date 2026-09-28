@@ -2,150 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZEYN Listening Lab — New 12 Tests</title>
-<link rel="manifest" href="manifest.webmanifest">
+<title>ZEYN Listening Lab</title>
 <style>
-:root{--navy:#09265f;--blue:#1167db;--sky:#eaf4ff;--green:#1eb980;--yellow:#ffc83d;--card:#fff;--ink:#10213d;--muted:#6f7f99}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#f5f8fe;color:var(--ink)}
-.wrap{max-width:1180px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.brand{font-weight:900;color:var(--navy);font-size:22px}.pill{background:#0e62d8;color:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:13px}
-.hero{background:linear-gradient(120deg,#fff,#edf7ff 60%,#ecfff7);border:1px solid #dfe9f7;border-radius:28px;padding:30px;box-shadow:0 14px 45px #2b5d9b18}
-.hero h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:0;color:var(--navy);letter-spacing:-2px}.hero h2{margin:12px 0 8px;color:#1167db}.hero p{color:var(--muted);max-width:650px}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stat{background:#fff;border:1px solid #e1e9f5;border-radius:14px;padding:12px 15px;font-weight:750}
-.section{margin-top:28px}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.level{border-radius:22px;padding:22px;min-height:165px;border:1px solid #dce6f4;position:relative;overflow:hidden}.level h3{font-size:30px;margin:8px 0}.level small{font-weight:800}.level.st{background:linear-gradient(135deg,#fff5c8,#fff)}.level.mo{background:linear-gradient(135deg,#d9ffe8,#fff)}.level.fl{background:linear-gradient(135deg,#d8ecff,#fff);cursor:pointer}
-.level.disabled{opacity:.58}.badge{display:inline-block;background:#ffffffaa;padding:6px 10px;border-radius:9px;font-weight:900}.ready{color:#0d67d9;font-weight:900}
-.panel{display:none;margin-top:18px;background:#fff;border:1px solid #dfe7f3;border-radius:24px;padding:20px;box-shadow:0 12px 35px #254f8612}.panel.show{display:block}
-.tests{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.test{border:1px solid #dce5f2;background:#fff;border-radius:16px;padding:16px;text-align:left;cursor:pointer;transition:.15s}.test:hover{transform:translateY(-2px);border-color:#4f8ee8}.test strong{display:block;font-size:18px}.test .state{font-size:12px;color:var(--muted);margin-top:5px}.test.coming{opacity:.5;cursor:not-allowed}
-.player{display:none;margin-top:18px;border-radius:20px;background:linear-gradient(135deg,#eff7ff,#f6fffb);padding:20px;border:1px solid #dbe8f8}.player.show{display:block}
-.player-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.player h3{margin:0}.parts{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:18px 0}.part{border:1px solid #d5e1f1;background:#fff;border-radius:13px;padding:12px;cursor:pointer;font-weight:850}.part.active{background:#1167db;color:#fff;border-color:#1167db}
-audio{width:100%;margin-top:10px}.hint{font-size:13px;color:var(--muted)}.back{border:0;background:#eef4ff;color:#0b57b7;padding:9px 12px;border-radius:10px;font-weight:800;cursor:pointer}
-.progress{height:8px;background:#e8eef8;border-radius:99px;overflow:hidden;margin-top:8px}.bar{height:100%;background:linear-gradient(90deg,#1167db,#22b982);width:0}
-.footer{text-align:center;color:#8090a8;font-size:12px;padding:35px 0}
-@media(max-width:850px){.levels{grid-template-columns:1fr}.tests{grid-template-columns:repeat(3,1fr)}.hero{padding:22px}.parts{grid-template-columns:repeat(5,1fr)}}
-@media(max-width:520px){.wrap{padding:12px}.tests{grid-template-columns:repeat(2,1fr)}.parts{grid-template-columns:repeat(2,1fr)}.hero h1{letter-spacing:-1px}.top .pill{font-size:11px}}
-</style>
-
-<style>
-body{background:linear-gradient(180deg,#f7fbff,#f4f8ff)}
-.top{background:#ffffffcc;backdrop-filter:blur(12px);padding:12px 16px;border-radius:16px;position:sticky;top:8px;z-index:20;box-shadow:0 8px 28px #183f7310}
-.hero{min-height:340px;display:flex;flex-direction:column;justify-content:center;background:
-radial-gradient(circle at 78% 25%,#c9f7e6 0 8%,transparent 9%),
-radial-gradient(circle at 88% 70%,#cde8ff 0 12%,transparent 13%),
-linear-gradient(120deg,#fff 0%,#edf7ff 58%,#ecfff7);border-radius:32px}
-.hero h1{font-size:clamp(46px,7vw,82px);letter-spacing:-3px;max-width:720px}
-.hero h2{font-size:clamp(20px,3vw,32px)}
-.stats .stat{box-shadow:0 8px 22px #1b4d8410}
-.levels{gap:20px}.level{min-height:205px;border-radius:26px;box-shadow:0 14px 35px #244d7d14;transition:.2s}
-.level:hover:not(.disabled){transform:translateY(-5px)}
-.level.st{background:linear-gradient(135deg,#fff0a6,#fff9df)}
-.level.mo{background:linear-gradient(135deg,#baf5cf,#edfff3)}
-.level.fl{background:linear-gradient(135deg,#b6dcff,#eef7ff)}
-.level h3{font-size:36px}.panel{border-radius:28px;padding:24px}
-.tests{grid-template-columns:repeat(4,1fr);gap:14px}.test{min-height:92px;border-radius:18px;box-shadow:0 7px 18px #17487c0c}
-.player{border-radius:26px;padding:24px;background:linear-gradient(180deg,#eaf6ff,#f7fbff 58%,#ecfaef)}
-.player-head h3{font-size:28px}.parts{gap:12px}.part{min-height:62px;border-radius:16px}
-audio{height:54px}
-@media(max-width:700px){
- .top{top:4px}.hero{min-height:300px;border-radius:24px}.hero h1{font-size:46px}
- .levels{grid-template-columns:1fr}.tests{grid-template-columns:repeat(2,1fr)}
- .level{min-height:155px}.level h3{font-size:30px}.panel{padding:14px}.parts{grid-template-columns:repeat(2,1fr)}
-}
-</style>
-
-<style>
-.hero{position:relative;overflow:hidden;padding:38px!important;min-height:390px!important}
-.hero:after{content:'🎧  📚';position:absolute;right:8%;top:25%;font-size:90px;filter:drop-shadow(0 15px 18px #174b8730)}
-.hero h1{font-size:clamp(52px,7vw,88px)!important;line-height:.9!important;max-width:650px}
-.levels{grid-template-columns:repeat(3,1fr)!important}
-.level{min-height:220px!important;padding:26px!important;position:relative;overflow:hidden}
-.level.st:after{content:'🐵';position:absolute;right:22px;bottom:10px;font-size:78px}
-.level.mo:after{content:'🐼';position:absolute;right:22px;bottom:10px;font-size:78px}
-.level.fl:after{content:'🦅';position:absolute;right:22px;bottom:10px;font-size:78px}
-.panel{box-shadow:0 18px 45px #174b8714!important}
-.player{min-height:320px!important;display:flex;flex-direction:column;justify-content:center}
-.tests .test{transition:.18s}.tests .test:hover{transform:translateY(-2px);box-shadow:0 9px 20px #17487c16}
-@media(max-width:700px){.hero:after{font-size:52px;right:5%;top:12%}.hero{padding:24px!important}.levels{grid-template-columns:1fr!important}.level{min-height:165px!important}}
-</style>
-<style>
-/* V3 premium layout */
-.hero{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr)!important;align-items:center!important;gap:32px!important}
-.hero:after{content:'Starters\A Movers\A Flyers';white-space:pre;position:relative!important;right:auto!important;top:auto!important;font-size:34px!important;font-weight:950!important;line-height:1.6!important;color:#fff!important;width:100%!important;min-height:250px!important;display:flex!important;align-items:center!important;justify-content:center!important;border-radius:28px!important;background:linear-gradient(#f2b632 0 33%,#16b875 33% 66%,#0870e8 66%)!important;filter:drop-shadow(0 18px 24px #174b8720)!important}
-.hero h1{font-size:clamp(58px,6vw,86px)!important;line-height:.9!important}
-.level{min-height:205px!important}
-.panel{display:block!important;margin-top:18px!important}
-.player{display:block!important;min-height:280px!important}
-@media(max-width:800px){.hero{grid-template-columns:1fr!important}.hero:after{min-height:180px!important;font-size:26px!important}.tests{grid-template-columns:repeat(2,1fr)!important}}
+:root{--ink:#071b55;--blue:#0868e8;--green:#19b875;--gold:#ffbf2f;--line:#d9e6f5;--muted:#697995;--bg:#f6f9ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button{font:inherit}.wrap{max-width:1440px;margin:auto;padding:0 28px}
+header{height:68px;background:#ffffffed;border-bottom:1px solid #edf2f9;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.head{height:100%;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;font-size:25px}.logo small{font-size:9px;margin-left:5px}
+nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(--ink)}.new{background:#075fd8;color:#fff;padding:11px 17px;border-radius:13px;font-weight:900}
+.hero{background:linear-gradient(115deg,#fff 0%,#f0f8ff 58%,#eafff7 100%);padding:32px 0}.heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:30px;align-items:center}
+.kicker{font-size:12px;font-weight:900;color:#0868e8;text-transform:uppercase;letter-spacing:.7px}.hero h1{font-size:62px;line-height:.92;letter-spacing:-3px;margin:10px 0 13px}.hero h2{font-size:26px;margin:0}.hero p{font-size:18px;color:#53627d}
+.features{display:flex;gap:11px;flex-wrap:wrap;margin-top:21px}.feature{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px 15px;font-weight:800;box-shadow:0 7px 18px #16477b0c}
+.rightHero{display:grid;grid-template-columns:1fr 1fr;gap:14px}.books{grid-column:1/3;min-height:175px;border-radius:25px;background:linear-gradient(145deg,#e4f5ff,#edfff5);display:grid;place-items:center;position:relative;overflow:hidden}
+.stack{width:245px;transform:rotate(-2deg)}.book{height:43px;border-radius:10px;margin:6px 0;display:grid;place-items:center;color:#fff;font-weight:950;font-size:21px;box-shadow:0 8px 16px #123a6e25}.s{background:#f5b62d}.m{background:#16b875}.f{background:#0870e8}.headphones{position:absolute;width:150px;height:130px;border:18px solid #073f9d;border-bottom-color:transparent;border-radius:80px 80px 0 0;right:55px;top:6px;transform:rotate(8deg)}
+.progress{grid-column:1/3;background:#fff;border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:0 12px 30px #17487b12}.progTop{display:flex;justify-content:space-between}.progTop b{font-size:20px}.bar{height:12px;background:#e5edf8;border-radius:99px;overflow:hidden;margin:11px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffc52f,#17b975)}
+.continue{background:#f1f7ff;border-radius:15px;padding:13px;display:flex;align-items:center;gap:12px;cursor:pointer}.circle{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#0868e8;color:#fff}
+.small{font-size:12px;color:var(--muted)}.section{padding:23px 0}.section h2{font-size:28px;margin:0 0 16px}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.level{height:180px;border:1px solid var(--line);border-radius:23px;padding:21px;position:relative;overflow:hidden;box-shadow:0 12px 30px #17487c10}.level h3{font-size:34px;margin:11px 0 5px}.level p{margin:0;font-weight:800}.badge{display:inline-block;padding:6px 10px;border-radius:9px;background:#ffffffc9;font-weight:900}.starter{background:linear-gradient(135deg,#ffeda1,#fff9df)}.mover{background:linear-gradient(135deg,#b9f2cd,#effff4)}.flyer{background:linear-gradient(135deg,#afd8ff,#eff7ff);cursor:pointer}.orb{position:absolute;width:125px;height:125px;border:18px solid #ffffff68;border-radius:50%;right:-20px;bottom:-30px}
+.lab{display:grid;grid-template-columns:245px 1fr;gap:18px;background:#fff;border:1px solid var(--line);border-radius:25px;padding:18px;margin-bottom:35px;box-shadow:0 14px 36px #17487c12}.side{border-right:1px solid #e4edf7;padding-right:14px}.side h3{margin:10px 0 13px}.test{width:100%;border:0;background:transparent;border-radius:10px;padding:8px 9px;text-align:left;cursor:pointer}.test:hover{background:#f4f7fc}.test.active{background:#e9f3ff;color:#075fd8;font-weight:900}.test.done{color:#118c5b}.mobileTests{display:none}
+.playerHead{display:flex;justify-content:space-between;align-items:center}.playerHead h2{font-size:30px;margin:4px 0}.scene{min-height:325px;border-radius:22px;margin-top:14px;background:linear-gradient(180deg,#dff2ff,#f9fcff 60%,#dff5dc);display:grid;place-items:center;padding:24px;position:relative;overflow:hidden}.scene:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:#8dcaff45;right:-40px;top:-45px}.scene:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:#7bc97f45;left:-30px;bottom:-35px}
+.player{position:relative;z-index:2;width:min(690px,96%);background:#ffffffef;border:1px solid #dbe7f5;border-radius:23px;padding:22px;box-shadow:0 18px 42px #17487d1e}.partLabel{display:inline-block;padding:7px 11px;background:#e6f2ff;color:#075fd8;border-radius:10px;font-weight:900}audio{width:100%;margin:15px 0 7px}.tools{display:flex;justify-content:center;gap:9px;margin:11px 0}.tool{border:1px solid #d9e5f2;background:#fff;border-radius:99px;padding:9px 14px;cursor:pointer}
+.parts{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}.part{border:1px solid #dbe5f1;background:#fff;border-radius:15px;padding:14px 8px;font-weight:850;cursor:pointer}.part.active{border:2px solid #0868e8;background:#edf6ff;color:#075fd8}.part.done{background:#eefcf5;border-color:#a6e3c1;color:#118b5a}.footer{text-align:center;color:#8391a8;font-size:12px;padding-bottom:28px}
+@media(max-width:850px){.wrap{padding:0 14px}nav{display:none}.heroGrid{grid-template-columns:1fr}.hero h1{font-size:46px}.rightHero{display:none}.levels{grid-template-columns:1fr}.level{height:145px}.lab{grid-template-columns:1fr}.side{border:0;padding:0}.desktopTests{display:none}.mobileTests{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mobileTests .test{text-align:center;border:1px solid #dbe5f1;padding:12px 5px}.parts{grid-template-columns:repeat(3,1fr)}.scene{min-height:280px;padding:12px}.player{padding:16px}}
 </style></head>
-<body><div class="wrap">
-<div class="top"><div class="brand">ZEYN <span style="font-weight:600;font-size:13px">TƏDRİS MƏRKƏZİ</span></div><div class="pill">YLE • NEW 12 TESTS</div></div>
-<section class="hero">
-<div class="badge">🎧 Cambridge English • Audio Portal</div>
-<h1>ZEYN<br>Listening Lab</h1>
-<h2>Cambridge English — New 12 Tests</h2>
-<p>Listen. Learn. Practice. Progress. Your listening position and completed parts are remembered automatically.</p>
-<div class="stats"><div class="stat">⭐ Pre A1 Starters</div><div class="stat">🟢 A1 Movers</div><div class="stat">🔵 A2 Flyers</div><div class="stat">60 Flyers audios ready</div></div>
-</section>
-
-<section class="section">
-<h2>Choose Your Level</h2>
-<div class="levels">
-<div class="level st disabled"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
-<div class="level mo disabled"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><small>COMING SOON</small></div>
-<div class="level fl" onclick="openFlyers()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><small class="ready">12 TESTS READY →</small></div>
-</div>
-</section>
-
-<section id="flyersPanel" class="panel">
-<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="badge">A2 FLYERS</div><h2 style="margin:8px 0">Listening Tests</h2><div class="hint">Tests 1–12 ready • 60 audio parts</div></div><button class="back" onclick="closeFlyers()">← Levels</button></div>
-<div class="progress"><div class="bar" id="overallBar"></div></div><div id="overallText" class="hint" style="margin:7px 0 16px"></div>
-<div class="tests" id="tests"></div>
-<div class="player" id="player">
-<div class="player-head"><div><div class="hint">A2 Flyers</div><h3 id="playerTitle">Test 1</h3></div><button class="back" onclick="document.getElementById('player').classList.remove('show')">Close</button></div>
-<div class="parts" id="parts"></div>
-<div class="hint" id="nowPlaying">Choose a part</div>
-<audio id="audio" controls preload="metadata"></audio>
-<div class="hint" style="margin-top:8px">Playback position is saved automatically.</div>
-</div>
-</section>
-<div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
-</div>
+<body>
+<header><div class="wrap head"><div class="logo">ZEYN <small>TƏDRİS MƏRKƏZİ</small></div><nav><a href="#">Home</a><a href="#levels">Starters</a><a href="#levels">Movers</a><a href="#levels">Flyers</a></nav><div class="new">New 12 Tests</div></div></header>
+<section class="hero"><div class="wrap heroGrid">
+<div><div class="kicker">Cambridge English • Audio Portal</div><h1>ZEYN<br>Listening Lab</h1><h2>Cambridge <span style="color:#0868e8">English – New 12 Tests</span></h2><p>Listen. Learn. Practice. Progress.</p><div class="features"><div class="feature">36 Audio Tests</div><div class="feature">Track Your Progress</div><div class="feature">Phone • Tablet • PC</div></div></div>
+<div class="rightHero"><div class="books"><div class="stack"><div class="book s">Starters</div><div class="book m">Movers</div><div class="book f">Flyers</div></div><div class="headphones"></div></div>
+<div class="progress"><div class="progTop"><b>Your Progress</b><b id="pct">0%</b></div><div class="small" id="progText">0 of 12 Flyers tests completed</div><div class="bar"><i id="progBar"></i></div><div class="continue" onclick="goLab()"><div class="circle">▶</div><div><b>Continue Listening</b><div class="small" id="continueText">Flyers • Test 1 • Part 1</div></div></div></div></div>
+</div></section>
+<main class="wrap">
+<section class="section" id="levels"><h2>Choose Your Level</h2><div class="levels">
+<div class="level starter"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><span class="small">COMING SOON</span><div class="orb"></div></div>
+<div class="level mover"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><span class="small">COMING SOON</span><div class="orb"></div></div>
+<div class="level flyer" onclick="goLab()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><span class="small">60 AUDIO PARTS READY</span><div class="orb"></div></div>
+</div></section>
+<section class="lab" id="lab">
+<aside class="side"><span class="badge">A2 FLYERS</span><h3>12 Tests</h3><div class="desktopTests" id="tests"></div><div class="mobileTests" id="mobileTests"></div></aside>
+<div><div class="playerHead"><div><b style="color:#0868e8">● A2 Flyers</b><h2 id="title">Test 1</h2><span class="small">Listening Practice</span></div><span class="badge">5 Parts</span></div>
+<div class="scene"><div class="player"><span class="partLabel" id="partLabel">Part 1 of 5</span><h3>Listening Practice</h3><div class="small">Listen carefully and complete the task in your book.</div><audio id="audio" controls preload="metadata"></audio><div class="tools"><button class="tool" onclick="skip(-10)">−10s</button><button class="tool" onclick="speed()">Speed <b id="rate">1×</b></button><button class="tool" onclick="skip(10)">+10s</button></div><div class="small">Playback position is saved automatically.</div></div></div><div class="parts" id="parts"></div></div>
+</section></main><div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
 <script>
-const READY=12, PARTS=5;
-let currentTest=1,currentPart=1;
-const audio=document.getElementById('audio');
-const key=(t,p)=>`zeyn_yle_flyers_${t}_${p}`;
-function openFlyers(){document.getElementById('flyersPanel').classList.add('show');document.getElementById('flyersPanel').scrollIntoView({behavior:'smooth'});renderTests()}
-function closeFlyers(){document.getElementById('flyersPanel').classList.remove('show')}
-function done(t,p){return localStorage.getItem(key(t,p)+'_done')==='1'}
-function renderTests(){
- const box=document.getElementById('tests');box.innerHTML='';
- for(let t=1;t<=12;t++){
-  let b=document.createElement('button');b.className='test'+(t>READY?' coming':'');
-  let count=t<=READY?[1,2,3,4,5].filter(p=>done(t,p)).length:0;
-  b.innerHTML=`<strong>🎧 Test ${t}</strong><div class="state">${t<=READY?`${count}/5 parts completed`:'Coming soon'}</div>`;
-  if(t<=READY)b.onclick=()=>openTest(t); box.appendChild(b)
- }
- updateOverall()
-}
-function updateOverall(){
- let n=0;for(let t=1;t<=READY;t++)for(let p=1;p<=5;p++)if(done(t,p))n++;
- let pct=Math.round(n/(READY*5)*100);
- document.getElementById('overallBar').style.width=pct+'%';
- document.getElementById('overallText').textContent=`${n} of ${READY*5} available parts completed (${pct}%)`;
-}
-function openTest(t){currentTest=t;document.getElementById('player').classList.add('show');document.getElementById('playerTitle').textContent=`Test ${t}`;renderParts();selectPart(1);document.getElementById('player').scrollIntoView({behavior:'smooth',block:'center'})}
-function renderParts(){
- const box=document.getElementById('parts');box.innerHTML='';
- for(let p=1;p<=5;p++){let b=document.createElement('button');b.className='part';b.id='part'+p;b.innerHTML=`${done(currentTest,p)?'✓ ':''}Part ${p}`;b.onclick=()=>selectPart(p);box.appendChild(b)}
-}
-function selectPart(p){
- currentPart=p;document.querySelectorAll('.part').forEach(x=>x.classList.remove('active'));document.getElementById('part'+p).classList.add('active');
- audio.src=`audio/flyers/flyers_t${String(currentTest).padStart(2,'0')}_p${String(p).padStart(2,'0')}.mp3`;
- document.getElementById('nowPlaying').textContent=`Test ${currentTest} • Part ${p}`;
- audio.onloadedmetadata=()=>{let pos=Number(localStorage.getItem(key(currentTest,currentPart)+'_pos')||0);if(pos>0&&pos<audio.duration-3)audio.currentTime=pos}
-}
-audio.addEventListener('timeupdate',()=>{if(audio.currentTime>0)localStorage.setItem(key(currentTest,currentPart)+'_pos',audio.currentTime.toFixed(1))});
-audio.addEventListener('ended',()=>{localStorage.setItem(key(currentTest,currentPart)+'_done','1');localStorage.removeItem(key(currentTest,currentPart)+'_pos');renderParts();renderTests()});
-renderTests();
+let test=+(localStorage.getItem('zTest')||1),part=+(localStorage.getItem('zPart')||1),r=1;const a=document.getElementById('audio');
+const K=(t,p,s)=>`zeyn_${t}_${p}_${s}`,done=(t,p)=>localStorage.getItem(K(t,p,'done'))==='1',testDone=t=>[1,2,3,4,5].every(p=>done(t,p));
+function tests(){for(const id of ['tests','mobileTests']){let x=document.getElementById(id);x.innerHTML='';for(let t=1;t<=12;t++){let b=document.createElement('button');b.className='test'+(t===test?' active':'')+(testDone(t)?' done':'');b.innerHTML=`${testDone(t)?'✓':'▶'} Test ${t}<span class="small" style="display:block">${testDone(t)?'Completed':t===test?'In progress':'Not started'}</span>`;b.onclick=()=>openTest(t);x.appendChild(b)}}progress()}
+function progress(){let n=0;for(let t=1;t<=12;t++)if(testDone(t))n++;let q=Math.round(n/12*100);document.getElementById('pct').textContent=q+'%';document.getElementById('progText').textContent=`${n} of 12 Flyers tests completed`;document.getElementById('progBar').style.width=q+'%'}
+function parts(){let x=document.getElementById('parts');x.innerHTML='';for(let p=1;p<=5;p++){let b=document.createElement('button');b.className='part'+(p===part?' active':'')+(done(test,p)?' done':'');b.innerHTML=`${done(test,p)?'✓ ':''}Part ${p}<span class="small" style="display:block">${done(test,p)?'Completed':p===part?'Selected':'Not started'}</span>`;b.onclick=()=>select(p);x.appendChild(b)}}
+function load(){document.getElementById('title').textContent='Test '+test;document.getElementById('partLabel').textContent=`Part ${part} of 5`;document.getElementById('continueText').textContent=`Flyers • Test ${test} • Part ${part}`;a.src=`audio/flyers/flyers_t${String(test).padStart(2,'0')}_p${String(part).padStart(2,'0')}.mp3`;a.onloadedmetadata=()=>{let q=+(localStorage.getItem(K(test,part,'pos'))||0);if(q>0&&q<a.duration-3)a.currentTime=q};parts()}
+function openTest(t){test=t;part=1;save();tests();load()}function select(p){part=p;save();load()}function save(){localStorage.setItem('zTest',test);localStorage.setItem('zPart',part)}
+function goLab(){document.getElementById('lab').scrollIntoView({behavior:'smooth'})}function skip(s){if(isFinite(a.duration))a.currentTime=Math.max(0,Math.min(a.duration,a.currentTime+s))}
+function speed(){r=r===1?1.25:r===1.25?.75:1;a.playbackRate=r;document.getElementById('rate').textContent=r+'×'}
+a.addEventListener('timeupdate',()=>{if(a.currentTime>0)localStorage.setItem(K(test,part,'pos'),a.currentTime.toFixed(1))});a.addEventListener('ended',()=>{localStorage.setItem(K(test,part,'done'),'1');localStorage.removeItem(K(test,part,'pos'));tests();parts()});tests();load();
 </script></body></html>
