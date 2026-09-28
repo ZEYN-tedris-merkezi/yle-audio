@@ -34,9 +34,9 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 </div></section>
 <main class="wrap">
 <section class="section" id="levels"><h2>Choose Your Level</h2><div class="levels">
-<div class="level starter"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><span class="small">COMING SOON</span><div class="orb"></div></div>
-<div class="level mover"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><span class="small">COMING SOON</span><div class="orb"></div></div>
-<div class="level flyer" onclick="goLab()"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><span class="small">60 AUDIO PARTS READY</span><div class="orb"></div></div>
+<div class="level starter" style="cursor:pointer" onclick="setLevel('starters')"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><span class="small">9 TESTS READY</span><div class="orb"></div></div>
+<div class="level mover><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><span class="small">COMING SOON</span><div class="orb"></div></div>
+<div class="level flyer" onclick="setLevel('flyers')"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><span class="small">60 AUDIO PARTS READY</span><div class="orb"></div></div>
 </div></section>
 <section class="lab" id="lab">
 <aside class="side"><span class="badge">A2 FLYERS</span><h3>12 Tests</h3><div class="desktopTests" id="tests"></div><div class="mobileTests" id="mobileTests"></div></aside>
@@ -44,14 +44,30 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 <div class="scene"><div class="player"><span class="partLabel" id="partLabel">Part 1 of 5</span><h3>Listening Practice</h3><div class="small">Listen carefully and complete the task in your book.</div><audio id="audio" controls preload="metadata"></audio><div class="tools"><button class="tool" onclick="skip(-10)">−10s</button><button class="tool" onclick="speed()">Speed <b id="rate">1×</b></button><button class="tool" onclick="skip(10)">+10s</button></div><div class="small">Playback position is saved automatically.</div></div></div><div class="parts" id="parts"></div></div>
 </section></main><div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
 <script>
-let test=+(localStorage.getItem('zTest')||1),part=+(localStorage.getItem('zPart')||1),r=1;const a=document.getElementById('audio');
-const K=(t,p,s)=>`zeyn_${t}_${p}_${s}`,done=(t,p)=>localStorage.getItem(K(t,p,'done'))==='1',testDone=t=>[1,2,3,4,5].every(p=>done(t,p));
-function tests(){for(const id of ['tests','mobileTests']){let x=document.getElementById(id);x.innerHTML='';for(let t=1;t<=12;t++){let b=document.createElement('button');b.className='test'+(t===test?' active':'')+(testDone(t)?' done':'');b.innerHTML=`${testDone(t)?'✓':'▶'} Test ${t}<span class="small" style="display:block">${testDone(t)?'Completed':t===test?'In progress':'Not started'}</span>`;b.onclick=()=>openTest(t);x.appendChild(b)}}progress()}
-function progress(){let n=0;for(let t=1;t<=12;t++)if(testDone(t))n++;let q=Math.round(n/12*100);document.getElementById('pct').textContent=q+'%';document.getElementById('progText').textContent=`${n} of 12 Flyers tests completed`;document.getElementById('progBar').style.width=q+'%'}
-function parts(){let x=document.getElementById('parts');x.innerHTML='';for(let p=1;p<=5;p++){let b=document.createElement('button');b.className='part'+(p===part?' active':'')+(done(test,p)?' done':'');b.innerHTML=`${done(test,p)?'✓ ':''}Part ${p}<span class="small" style="display:block">${done(test,p)?'Completed':p===part?'Selected':'Not started'}</span>`;b.onclick=()=>select(p);x.appendChild(b)}}
-function load(){document.getElementById('title').textContent='Test '+test;document.getElementById('partLabel').textContent=`Part ${part} of 5`;document.getElementById('continueText').textContent=`Flyers • Test ${test} • Part ${part}`;a.src=`audio/flyers/flyers_t${String(test).padStart(2,'0')}_p${String(part).padStart(2,'0')}.mp3`;a.onloadedmetadata=()=>{let q=+(localStorage.getItem(K(test,part,'pos'))||0);if(q>0&&q<a.duration-3)a.currentTime=q};parts()}
-function openTest(t){test=t;part=1;save();tests();load()}function select(p){part=p;save();load()}function save(){localStorage.setItem('zTest',test);localStorage.setItem('zPart',part)}
+let level=localStorage.getItem('zLevel')||'flyers',r=1;
+const cfg={starters:{name:'Pre A1 Starters',short:'Starters',ready:9,parts:4},flyers:{name:'A2 Flyers',short:'Flyers',ready:12,parts:5}};
+let test=+(localStorage.getItem('zTest_'+level)||1),part=+(localStorage.getItem('zPart_'+level)||1);
+const a=document.getElementById('audio'),C=()=>cfg[level],K=(t,p,s)=>`zeyn_${level}_${t}_${p}_${s}`;
+const done=(t,p)=>localStorage.getItem(K(t,p,'done'))==='1';
+const testDone=t=>Array.from({length:C().parts},(_,i)=>done(t,i+1)).every(Boolean);
+function tests(){
+ document.querySelector('.side .badge').textContent=C().name.toUpperCase();
+ document.querySelector('.playerHead b').textContent='● '+C().name;
+ document.querySelector('.playerHead .badge').textContent=C().parts+' Parts';
+ for(const id of ['tests','mobileTests']){let x=document.getElementById(id);x.innerHTML='';
+  for(let t=1;t<=12;t++){let ok=t<=C().ready,b=document.createElement('button');
+   b.className='test'+(ok&&t===test?' active':'')+(ok&&testDone(t)?' done':'');b.disabled=!ok;b.style.opacity=ok?1:.42;
+   b.innerHTML=ok?`${testDone(t)?'✓':'▶'} Test ${t}<span class="small" style="display:block">${testDone(t)?'Completed':t===test?'In progress':'Not started'}</span>`:`Test ${t}<span class="small" style="display:block">Coming soon</span>`;
+   if(ok)b.onclick=()=>openTest(t);x.appendChild(b)}}
+ progress()}
+function progress(){let n=0;for(let t=1;t<=C().ready;t++)if(testDone(t))n++;let q=Math.round(n/C().ready*100);
+ document.getElementById('pct').textContent=q+'%';document.getElementById('progText').textContent=`${n} of ${C().ready} ${C().short} tests completed`;document.getElementById('progBar').style.width=q+'%'}
+function parts(){let x=document.getElementById('parts');x.innerHTML='';for(let p=1;p<=C().parts;p++){let b=document.createElement('button');b.className='part'+(p===part?' active':'')+(done(test,p)?' done':'');b.innerHTML=`${done(test,p)?'✓ ':''}Part ${p}<span class="small" style="display:block">${done(test,p)?'Completed':p===part?'Selected':'Not started'}</span>`;b.onclick=()=>select(p);x.appendChild(b)}}
+function load(){if(test>C().ready)test=1;if(part>C().parts)part=1;document.getElementById('title').textContent='Test '+test;document.getElementById('partLabel').textContent=`Part ${part} of ${C().parts}`;document.getElementById('continueText').textContent=`${C().short} • Test ${test} • Part ${part}`;
+ a.src=`audio/${level}/${level}_t${String(test).padStart(2,'0')}_p${String(part).padStart(2,'0')}.mp3`;a.onloadedmetadata=()=>{let q=+(localStorage.getItem(K(test,part,'pos'))||0);if(q>0&&q<a.duration-3)a.currentTime=q};parts()}
+function setLevel(l){level=l;localStorage.setItem('zLevel',l);test=+(localStorage.getItem('zTest_'+l)||1);part=+(localStorage.getItem('zPart_'+l)||1);tests();load();goLab()}
+function openTest(t){test=t;part=1;save();tests();load()}function select(p){part=p;save();load()}function save(){localStorage.setItem('zTest_'+level,test);localStorage.setItem('zPart_'+level,part)}
 function goLab(){document.getElementById('lab').scrollIntoView({behavior:'smooth'})}function skip(s){if(isFinite(a.duration))a.currentTime=Math.max(0,Math.min(a.duration,a.currentTime+s))}
 function speed(){r=r===1?1.25:r===1.25?.75:1;a.playbackRate=r;document.getElementById('rate').textContent=r+'×'}
-a.addEventListener('timeupdate',()=>{if(a.currentTime>0)localStorage.setItem(K(test,part,'pos'),a.currentTime.toFixed(1))});a.addEventListener('ended',()=>{localStorage.setItem(K(test,part,'done'),'1');localStorage.removeItem(K(test,part,'pos'));tests();parts()});tests();load();
+a.addEventListener('timeupdate',()=>{if(a.currentTime>0)localStorage.setItem(K(test,part,'pos'),a.currentTime.toFixed(1))});a.addEventListener('ended',()=>{localStorage.setItem(K(test,part,'done'),'1');tests();parts()});tests();load();
 </script></body></html>
