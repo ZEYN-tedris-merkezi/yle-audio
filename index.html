@@ -28,7 +28,7 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 <body>
 <header><div class="wrap head"><div class="logo">ZEYN <small>TƏDRİS MƏRKƏZİ</small></div><nav><a href="#">Home</a><a href="#levels">Starters</a><a href="#levels">Movers</a><a href="#levels">Flyers</a></nav><div class="new">New 12 Tests</div></div></header>
 <section class="hero"><div class="wrap heroGrid">
-<div><div class="kicker">Cambridge English • Audio Portal</div><h1>ZEYN<br>Listening Lab</h1><h2>Cambridge <span style="color:#0868e8">English – New 12 Tests</span></h2><p>Listen. Learn. Practice. Progress.</p><div class="features"><div class="feature">36 Audio Tests</div><div class="feature">Track Your Progress</div><div class="feature">Phone • Tablet • PC</div></div></div>
+<div><div class="kicker">Cambridge English • Audio Portal</div><h1>ZEYN<br>Listening Lab</h1><h2>Cambridge <span style="color:#0868e8">English – New 12 Tests</span></h2><p>Listen. Learn. Practice. Progress.</p><div class="features"><div class="feature">30 Listening Tests</div><div class="feature">Track Your Progress</div><div class="feature">Phone • Tablet • PC</div></div></div>
 <div class="rightHero"><div class="books"><div class="stack"><div class="book s">Starters</div><div class="book m">Movers</div><div class="book f">Flyers</div></div><div class="headphones"></div></div>
 <div class="progress"><div class="progTop"><b>Your Progress</b><b id="pct">0%</b></div><div class="small" id="progText">0 of 12 Flyers tests completed</div><div class="bar"><i id="progBar"></i></div><div class="continue" onclick="goLab()"><div class="circle">▶</div><div><b>Continue Listening</b><div class="small" id="continueText">Flyers • Test 1 • Part 1</div></div></div></div></div>
 </div></section>
@@ -45,7 +45,7 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 </section></main><div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
 <script>
 let level=localStorage.getItem('zLevel')||'flyers',r=1;
-const cfg={starters:{name:'Pre A1 Starters',short:'Starters',ready:9,parts:4},flyers:{name:'A2 Flyers',short:'Flyers',ready:12,parts:5}};
+const cfg={starters:{name:'Pre A1 Starters',short:'Starters',ready:9,parts:4},movers:{name:'A1 Movers',short:'Movers',ready:9,parts:5},flyers:{name:'A2 Flyers',short:'Flyers',ready:12,parts:5}};
 let test=+(localStorage.getItem('zTest_'+level)||1),part=+(localStorage.getItem('zPart_'+level)||1);
 const a=document.getElementById('audio'),C=()=>cfg[level],K=(t,p,s)=>`zeyn_${level}_${t}_${p}_${s}`;
 const done=(t,p)=>localStorage.getItem(K(t,p,'done'))==='1';
