@@ -35,7 +35,7 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 <main class="wrap">
 <section class="section" id="levels"><h2>Choose Your Level</h2><div class="levels">
 <div class="level starter" style="cursor:pointer" onclick="setLevel('starters')"><span class="badge">Pre A1</span><h3>Starters</h3><p>12 Listening Tests</p><span class="small">12 TESTS READY</span><div class="orb"></div></div>
-<div class="level mover" style="cursor:pointer" onclick="setLevel('movers')"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><span class="small">9 TESTS READY</span><div class="orb"></div></div>
+<div class="level mover" style="cursor:pointer" onclick="setLevel('movers')"><span class="badge">A1</span><h3>Movers</h3><p>12 Listening Tests</p><span class="small">12 TESTS READY</span><div class="orb"></div></div>
 <div class="level flyer" onclick="setLevel('flyers')"><span class="badge">A2</span><h3>Flyers</h3><p>12 Listening Tests</p><span class="small">60 AUDIO PARTS READY</span><div class="orb"></div></div>
 </div></section>
 <section class="lab" id="lab">
@@ -45,7 +45,7 @@ nav{display:flex;gap:34px;font-weight:800}nav a{text-decoration:none;color:var(-
 </section></main><div class="footer">ZEYN Tədris Mərkəzi • YLE Listening Lab</div>
 <script>
 let level=localStorage.getItem('zLevel')||'flyers',r=1;
-const cfg={starters:{name:'Pre A1 Starters',short:'Starters',ready:12,parts:4},movers:{name:'A1 Movers',short:'Movers',ready:9,parts:5},flyers:{name:'A2 Flyers',short:'Flyers',ready:12,parts:5}};
+const cfg={starters:{name:'Pre A1 Starters',short:'Starters',ready:12,parts:4},movers:{name:'A1 Movers',short:'Movers',ready:12,parts:5},flyers:{name:'A2 Flyers',short:'Flyers',ready:12,parts:5}};
 let test=+(localStorage.getItem('zTest_'+level)||1),part=+(localStorage.getItem('zPart_'+level)||1);
 const a=document.getElementById('audio'),C=()=>cfg[level],K=(t,p,s)=>`zeyn_${level}_${t}_${p}_${s}`;
 const done=(t,p)=>localStorage.getItem(K(t,p,'done'))==='1';
